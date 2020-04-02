@@ -1,14 +1,25 @@
 package com.galvanize.entities;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "movies")
 public class Movie {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long movieid;
+    @Column(name = "imdbid")
     String imdbid;
+    @Column(name = "actors")
     String actors;
+    @Column(name = "director")
     String director;
+    @Column(name = "title")
     String title;
+    @Column(name = "year")
     String year;
+    @Column(name = "released")
     LocalDate released;
 
     public Movie() {
