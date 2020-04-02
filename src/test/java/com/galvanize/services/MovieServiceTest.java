@@ -160,4 +160,21 @@ class MovieServiceTest {
         assertEquals(movieListInDB.size(), actual.size());
         //Teardown
     }
+
+
+    //UPDATE
+
+
+    @Test
+    public void update_movieDaoContainsMovies_returnsMovie() {
+        //Setup
+        Movie expected = new Movie();
+        expected = movieService.save(expected);
+        expected.setImdbid("888");
+        //Exercise
+        Movie actual = movieService.update(expected.getMovieid(), expected);
+        //Assert
+        assertEquals(expected.getMovieid(), actual.getMovieid());
+        //Teardown
+    }
 }

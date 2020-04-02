@@ -44,4 +44,12 @@ public class MovieService {
     public List<Movie> findAllByActorDirectorGenreTitle(String actor, String director, Genre genre, String title) {
         return movieDao.findAllByActorDirectorGenreTitle(actor, director, genre, title);
     }
+
+    public Movie update(Long movieid, Movie movie) {
+        if(movieDao.existsById(movieid)){
+            return movieDao.save(movie);
+        }else {
+            return null;
+        }
+    }
 }
