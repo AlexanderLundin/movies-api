@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface MovieDao extends JpaRepository <Movie, Long> {
+public interface MovieRepository extends JpaRepository <Movie, Long> {
 
     @Query(value = "SELECT * FROM movies m where m.imdbId = ?1",
             nativeQuery=true

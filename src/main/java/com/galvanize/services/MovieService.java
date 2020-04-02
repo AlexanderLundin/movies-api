@@ -2,17 +2,17 @@ package com.galvanize.services;
 
 import com.galvanize.entities.Genre;
 import com.galvanize.entities.Movie;
-import com.galvanize.repositories.MovieDao;
+import com.galvanize.repositories.MovieRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class MovieService {
-    private MovieDao movieDao;
+    private MovieRepository movieRepository;
 
-    public MovieService(MovieDao movieDao){
-        this.movieDao = movieDao;
+    public MovieService(MovieRepository movieRepository){
+        this.movieRepository = movieRepository;
     }
 
 
@@ -20,7 +20,7 @@ public class MovieService {
 
 
     public Movie save(Movie movie) {
-        return movieDao.save(movie);
+        return movieRepository.save(movie);
     }
 
 
@@ -28,21 +28,21 @@ public class MovieService {
 
 
     public List<Movie> findAll() {
-        return movieDao.findAll();
+        return movieRepository.findAll();
     }
 
 
     public Movie findByImdbId(String imdbId) {
-        Movie movie = movieDao.findByImdbId(imdbId);
+        Movie movie = movieRepository.findByImdbId(imdbId);
         return movie;
     }
 
     public List<Movie> findAllByTitle(String title) {
-        return movieDao.findAllByTitle(title);
+        return movieRepository.findAllByTitle(title);
     }
 
     public List<Movie> findAllByActorDirectorGenreTitle(String actor, String director, Genre genre, String title) {
-        return movieDao.findAllByActorDirectorGenreTitle(actor, director, genre, title);
+        return movieRepository.findAllByActorDirectorGenreTitle(actor, director, genre, title);
     }
 
 
@@ -50,8 +50,8 @@ public class MovieService {
 
 
     public Movie update(Long movieid, Movie movie) {
-        if(movieDao.existsById(movieid)){
-            return movieDao.save(movie);
+        if(movieRepository.existsById(movieid)){
+            return movieRepository.save(movie);
         }else {
             return null;
         }
@@ -62,8 +62,8 @@ public class MovieService {
 
 
     public void delete(Long movieid) {
-        if(movieDao.existsById(movieid)){
-            movieDao.deleteById(movieid);
+        if(movieRepository.existsById(movieid)){
+            movieRepository.deleteById(movieid);
         }
     }
 }
