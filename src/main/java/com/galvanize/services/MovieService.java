@@ -36,4 +36,8 @@ public class MovieService {
         Movie movie = movieDao.findByImdbId(imdbId);
         return movie;
     }
+
+    public List<Movie> findAllByTitle(String title) {
+        return movieDao.findAllByTitle(title);
+    }
 }

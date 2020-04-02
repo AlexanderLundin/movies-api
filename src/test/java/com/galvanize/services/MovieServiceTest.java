@@ -110,4 +110,15 @@ class MovieServiceTest {
         assertNull(actual);
         //Teardown
     }
+
+    @Test
+    public void findAllByTitle_movieDaoContainsMovies_returnsList() {
+        //Setup
+        String title = movie1.getTitle();
+        //Exercise
+        List<Movie> actual = movieService.findAllByTitle(title);
+        //Assert
+        assertEquals(movieListInDB.size(), actual.size());
+        //Teardown
+    }
 }
