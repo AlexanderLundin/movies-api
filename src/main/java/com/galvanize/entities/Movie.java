@@ -23,6 +23,7 @@ public class Movie {
     @Column(name = "released")
     LocalDate released;
     @Column(name = "genre")
+    @Enumerated
     Genre genre;
 
     public Movie() {
