@@ -25,21 +25,6 @@ class MovieServiceTest {
     private MovieService movieService;
 
 
-    private Long movieid;
-    private String imdbid = "1";
-    private String actors = "actor1, actor2, actor3";
-    private String director = "director";
-    private String title = "title";
-    private String year = "2020";
-    private LocalDate released = LocalDate.now();
-
-    private Movie movie1;
-    private Movie movie2;
-    private Movie movie3;
-    private Movie movie4;
-    private Movie movie5;
-    private Movie movie6;
-
     private List<Movie> movieListInDB = new ArrayList<>();;
 
 
@@ -49,23 +34,21 @@ class MovieServiceTest {
     @BeforeEach
     public void save_validMovie_returnsMovie() {
         //Setup
-        movieid = 1L;
-        imdbid = "1";
-        actors = "actor1, actor2, actor3";
-        director = "director";
-        title = "title";
-        year = "2020";
+        Movie movie;
+        String actors = "actor1, actor2, actor3";
+        String director = "director";
+        String title = "title";
+        String year = "2020";
         LocalDate released = LocalDate.now();
-        movie1 = new Movie(movieid, imdbid, actors, director, title, year, released, Genre.ACTION);
-        Movie actual1 = movieService.save(movie1);
-        movieid = 2L;
-        imdbid = "2";
-        movie2 = new Movie(movieid, imdbid, actors, director, title, year, released, Genre.ROMANCE);
-        Movie actual2 = movieService.save(movie2);
-        movieListInDB.add(movie1);
-        movieListInDB.add(movie2);
-        assertNotNull(actual1);
-        assertNotNull(actual2);
+        Long movieid;
+        String imdbid;
+        for (long i = 1L; i < 6L ; i++) {
+            movieid = i;
+            imdbid = Long.toString(i);
+            movie = new Movie(movieid, imdbid, actors, director, title, year, released, Genre.ACTION);
+            movieService.save(movie);
+            movieListInDB.add(movie);
+        }
     }
 
     @Test
@@ -92,11 +75,11 @@ class MovieServiceTest {
     @Test
     public void findByImdbId_movieDaoContainsMovie_returnsMovie() {
         //Setup
-        String imdbId = movie1.getImdbid();
+        String imdbId = movieListInDB.get(1).getImdbid();
         //Exercise
         Movie actual = movieService.findByImdbId(imdbId);
         //Assert
-        assertEquals(movie1, actual);
+        assertEquals(movieListInDB.get(1).getImdbid(), actual.getImdbid());
         //Teardown
     }
 
@@ -114,7 +97,7 @@ class MovieServiceTest {
     @Test
     public void findAllByTitle_movieDaoContainsMovies_returnsList() {
         //Setup
-        String title = movie1.getTitle();
+        String title = movieListInDB.get(1).getTitle();
         //Exercise
         List<Movie> actual = movieService.findAllByTitle(title);
         //Assert
@@ -126,13 +109,13 @@ class MovieServiceTest {
     public void findAllByActorDirectorGenreTitle_allParametersPresent_returnsList() {
         //Setup
         String actor = "actor1";
-        director = movie1.getDirector();
+        String director = movieListInDB.get(1).getDirector();
         Genre genre = Genre.ROMANCE;
-        title = movie1.getTitle();
+        String title = movieListInDB.get(1).getTitle();
         //Exercise
         List<Movie> actual = movieService.findAllByActorDirectorGenreTitle(actor,director,genre,title);
         //Assert
-        assertEquals(1, actual.size());
+        assertEquals(0, actual.size());
         //Teardown
     }
 
@@ -140,27 +123,27 @@ class MovieServiceTest {
     public void findAllByActorDirectorGenreTitle_actorAndTitleParametersPresent_returnsList() {
         //Setup
         String actor = "actor1";
-        director = null;
+        String director = null;
         Genre genre = null;
-        title = movie1.getTitle();
+        String title = movieListInDB.get(1).getTitle();
         //Exercise
         List<Movie> actual = movieService.findAllByActorDirectorGenreTitle(actor,director,genre,title);
         //Assert
-        assertEquals(2, actual.size());
+        assertEquals(movieListInDB.size(), actual.size());
         //Teardown
     }
 
     @Test
-    public void findAllByActorDirectorGenreTitle_directoryAndTitleParametersPresent_returnsList() {
+    public void findAllByActorDirectorGenreTitle_directorAndTitleParametersPresent_returnsList() {
         //Setup
         String actor = null;
-        director = movie1.getDirector();
+        String director = movieListInDB.get(1).getDirector();
         Genre genre = null;
-        title = movie1.getTitle();
+        String title = movieListInDB.get(1).getTitle();
         //Exercise
         List<Movie> actual = movieService.findAllByActorDirectorGenreTitle(actor,director,genre,title);
         //Assert
-        assertEquals(2, actual.size());
+        assertEquals(movieListInDB.size(), actual.size());
         //Teardown
     }
 
@@ -168,13 +151,13 @@ class MovieServiceTest {
     public void findAllByActorDirectorGenreTitle_titleParameterPresent_returnsList() {
         //Setup
         String actor = null;
-        director = null;
+        String director = null;
         Genre genre = null;
-        title = movie1.getTitle();
+        String title = movieListInDB.get(1).getTitle();
         //Exercise
         List<Movie> actual = movieService.findAllByActorDirectorGenreTitle(actor,director,genre,title);
         //Assert
-        assertEquals(2, actual.size());
+        assertEquals(movieListInDB.size(), actual.size());
         //Teardown
     }
 }

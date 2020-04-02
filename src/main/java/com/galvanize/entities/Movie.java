@@ -22,8 +22,8 @@ public class Movie {
     String year;
     @Column(name = "released")
     LocalDate released;
+    @Enumerated(EnumType.STRING)
     @Column(name = "genre")
-    @Enumerated
     Genre genre;
 
     public Movie() {

@@ -21,6 +21,7 @@ public interface MovieDao extends JpaRepository <Movie, Long> {
     @Query(value = "SELECT * FROM movies m WHERE m.title LIKE ?1", nativeQuery=true)
     List<Movie> findAllByTitle(String title);
 
-    @Query("select m FROM Movie m where (?1 is null or m.actors LIKE %?1%) AND (?2 is null or m.director = ?2) AND (?3 is null or m.genre = ?3) AND m.title = ?4")
+    //or m.genre LIKE ?3
+    @Query("select m FROM Movie m where (?1 is null or m.actors LIKE %?1%) AND (?2 is null or m.director = ?2) AND (?3 is null) AND m.title = ?4")
     List<Movie> findAllByActorDirectorGenreTitle(String actors, String director, Genre genre, String title);
 }
