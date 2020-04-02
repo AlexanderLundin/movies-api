@@ -33,4 +33,34 @@ class MovieTest {
         assertNotNull(movie);
         //Teardown
     }
+
+    @Test
+    public void settersAndGetters_returnsMovie() {
+        //Setup
+        Movie movie = new Movie();
+        Long movieid = 1L;
+        String imdbid = "1";
+        String actors = "actor1, actor2, actor3";
+        String director = "director";
+        String title = "title";
+        String year = "2020";
+        LocalDate released = LocalDate.now();
+        //Exercise
+        movie.setActors(actors);
+        movie.setDirector(director);
+        movie.setImdbid(imdbid);
+        movie.setMovieid(movieid);
+        movie.setTitle(title);
+        movie.setYear(year);
+        movie.setReleased(released);
+        //Assert
+        assertEquals(actors, movie.getActors());
+        assertEquals(director, movie.getDirector());
+        assertEquals(imdbid, movie.getImdbid());
+        assertEquals(movieid, movie.getMovieid());
+        assertEquals(title, movie.getTitle());
+        assertEquals(year, movie.getYear());
+        assertEquals(released, movie.getReleased());
+        //Teardown
+    }
 }
