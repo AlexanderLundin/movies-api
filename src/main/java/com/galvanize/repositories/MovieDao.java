@@ -16,6 +16,6 @@ public interface MovieDao extends JpaRepository <Movie, Long> {
     )
     Movie findByImdbId(String imdbId);
 
-    @Query(value = "SELECT * FROM movies m WHERE m.title = ?1", nativeQuery=true)
+    @Query(value = "SELECT * FROM movies m WHERE m.title LIKE ?1", nativeQuery=true)
     List<Movie> findAllByTitle(String title);
 }
