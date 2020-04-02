@@ -5,10 +5,14 @@ import com.galvanize.repositories.MovieDao;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MoviesService {
+public class MovieService {
     private MovieDao movieDao;
 
-    public MoviesService(MovieDao movieDao){
+    public MovieService(MovieDao movieDao){
         this.movieDao = movieDao;
+    }
+
+    public Movie save(Movie movie) {
+        return movieDao.save(movie);
     }
 }

@@ -2,6 +2,7 @@ package com.galvanize.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table(name = "movies")
@@ -33,6 +34,17 @@ public class Movie {
         this.year = year;
         this.released = released;
     }
+
+    public Movie(Long movieid, String imdbid, String actors, String director, String title, String year, LocalDate released) {
+        this.movieid = movieid;
+        this.imdbid = imdbid;
+        this.actors = actors;
+        this.director = director;
+        this.title = title;
+        this.year = year;
+        this.released = released;
+    }
+
     public Long getMovieid() {
         return movieid;
     }
@@ -87,5 +99,24 @@ public class Movie {
 
     public void setReleased(LocalDate released) {
         this.released = released;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Movie)) return false;
+        Movie movie = (Movie) o;
+        return Objects.equals(movieid, movie.movieid) &&
+                Objects.equals(imdbid, movie.imdbid) &&
+                Objects.equals(actors, movie.actors) &&
+                Objects.equals(director, movie.director) &&
+                Objects.equals(title, movie.title) &&
+                Objects.equals(year, movie.year) &&
+                Objects.equals(released, movie.released);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(movieid, imdbid, actors, director, title, year, released);
     }
 }
