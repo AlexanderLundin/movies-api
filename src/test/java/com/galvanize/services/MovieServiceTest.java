@@ -10,20 +10,20 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
 @ActiveProfiles("test")
 class MovieServiceTest {
+
+
     @Autowired
     private MovieService movieService;
 
-
-    @Autowired
-    private MovieDao movieDao;
 
     private Long movieid;
     private String imdbid = "1";
@@ -40,6 +40,8 @@ class MovieServiceTest {
     private Movie movie5;
     private Movie movie6;
 
+    private List<Movie> movieListInDB = new ArrayList<>();;
+
     @BeforeEach
     public void save_validMovie_returnsMovie() {
         //Setup
@@ -52,12 +54,30 @@ class MovieServiceTest {
         LocalDate released = LocalDate.now();
         movie1 = new Movie(movieid, imdbid, actors, director, title, year, released);
         Movie actual1 = movieService.save(movie1);
-        assertTrue(actual1.equals(movie1));
+        movieid = 2L;
+        imdbid = "2";
+        movie2 = new Movie(movieid, imdbid, actors, director, title, year, released);
+        Movie actual2 = movieService.save(movie2);
+        movieListInDB.add(movie1);
+        movieListInDB.add(movie2);
+        assertNotNull(actual1);
+        assertNotNull(actual2);
     }
+
     @Test
-    public void testH2configuration() {
+    public void testH2configuration_executesWithoutError() {
         //Setup
         System.out.println("test");
         //Exercise
+    }
+
+    @Test
+    public void getAllMovies_movieDaoContainsMovies_returnsList() {
+        //Setup
+        //Exercise
+        List<Movie> actual = movieService.findAll();
+        //Assert
+        assertEquals(movieListInDB.size(), actual.size());
+        //Teardown
     }
 }
