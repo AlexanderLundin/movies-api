@@ -5,6 +5,7 @@ import com.galvanize.repositories.MovieDao;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MovieService {
@@ -31,4 +32,8 @@ public class MovieService {
     }
 
 
+    public Movie findByImdbId(String imdbId) {
+        Movie movie = movieDao.findByImdbId(imdbId);
+        return movie;
+    }
 }

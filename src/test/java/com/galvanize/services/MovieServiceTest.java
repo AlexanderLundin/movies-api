@@ -42,6 +42,10 @@ class MovieServiceTest {
 
     private List<Movie> movieListInDB = new ArrayList<>();;
 
+
+    //CREATE
+
+
     @BeforeEach
     public void save_validMovie_returnsMovie() {
         //Setup
@@ -71,13 +75,39 @@ class MovieServiceTest {
         //Exercise
     }
 
+
+    //READ
+
+
     @Test
-    public void getAllMovies_movieDaoContainsMovies_returnsList() {
+    public void findAll_movieDaoContainsMovies_returnsList() {
         //Setup
         //Exercise
         List<Movie> actual = movieService.findAll();
         //Assert
         assertEquals(movieListInDB.size(), actual.size());
+        //Teardown
+    }
+
+    @Test
+    public void findByImdbId_movieDaoContainsMovie_returnsMovie() {
+        //Setup
+        String imdbId = movie1.getImdbid();
+        //Exercise
+        Movie actual = movieService.findByImdbId(imdbId);
+        //Assert
+        assertEquals(movie1, actual);
+        //Teardown
+    }
+
+    @Test
+    public void findByImdbId_movieDaoDoesNotContainMovie_returnsNull() {
+        //Setup
+        String imdbId = "";
+        //Exercise
+        Movie actual = movieService.findByImdbId(imdbId);
+        //Assert
+        assertNull(actual);
         //Teardown
     }
 }
