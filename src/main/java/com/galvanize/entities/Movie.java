@@ -22,6 +22,8 @@ public class Movie {
     String year;
     @Column(name = "released")
     LocalDate released;
+    @Column(name = "genre")
+    Genre genre;
 
     public Movie() {
     }
@@ -43,6 +45,17 @@ public class Movie {
         this.title = title;
         this.year = year;
         this.released = released;
+    }
+
+    public Movie(Long movieid, String imdbid, String actors, String director, String title, String year, LocalDate released, Genre genre) {
+        this.movieid = movieid;
+        this.imdbid = imdbid;
+        this.actors = actors;
+        this.director = director;
+        this.title = title;
+        this.year = year;
+        this.released = released;
+        this.genre = genre;
     }
 
     public Long getMovieid() {

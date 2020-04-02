@@ -1,7 +1,7 @@
 package com.galvanize.services;
 
+import com.galvanize.entities.Genre;
 import com.galvanize.entities.Movie;
-import com.galvanize.repositories.MovieDao;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,11 +56,11 @@ class MovieServiceTest {
         title = "title";
         year = "2020";
         LocalDate released = LocalDate.now();
-        movie1 = new Movie(movieid, imdbid, actors, director, title, year, released);
+        movie1 = new Movie(movieid, imdbid, actors, director, title, year, released, Genre.ACTION);
         Movie actual1 = movieService.save(movie1);
         movieid = 2L;
         imdbid = "2";
-        movie2 = new Movie(movieid, imdbid, actors, director, title, year, released);
+        movie2 = new Movie(movieid, imdbid, actors, director, title, year, released, Genre.ROMANCE);
         Movie actual2 = movieService.save(movie2);
         movieListInDB.add(movie1);
         movieListInDB.add(movie2);
@@ -119,6 +119,20 @@ class MovieServiceTest {
         List<Movie> actual = movieService.findAllByTitle(title);
         //Assert
         assertEquals(movieListInDB.size(), actual.size());
+        //Teardown
+    }
+
+    @Test
+    public void findAllByActorDirectorGenreTitle_movieDaoContainsMovies_returnsList() {
+        //Setup
+        String actor = "actor1";
+        director = movie1.getDirector();
+        Genre genre = Genre.ROMANCE;
+        title = movie1.getTitle();
+        //Exercise
+        List<Movie> actual = movieService.findAllByActorDirectorGenre(actor,director,genre,title);
+        //Assert
+        assertEquals(1, actual.size());
         //Teardown
     }
 }

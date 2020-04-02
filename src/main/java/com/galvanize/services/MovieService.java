@@ -1,11 +1,11 @@
 package com.galvanize.services;
 
+import com.galvanize.entities.Genre;
 import com.galvanize.entities.Movie;
 import com.galvanize.repositories.MovieDao;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MovieService {
@@ -39,5 +39,9 @@ public class MovieService {
 
     public List<Movie> findAllByTitle(String title) {
         return movieDao.findAllByTitle(title);
+    }
+
+    public List<Movie> findAllByActorDirectorGenre(String actor, String director, Genre genre, String title) {
+        return movieDao.findAllByActorDirectorGenre(actor, director, genre, title);
     }
 }
