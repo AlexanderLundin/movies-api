@@ -130,7 +130,7 @@ class MovieServiceTest {
         Genre genre = Genre.ROMANCE;
         title = movie1.getTitle();
         //Exercise
-        List<Movie> actual = movieService.findAllByActorDirectorGenre(actor,director,genre,title);
+        List<Movie> actual = movieService.findAllByActorDirectorGenreTitle(actor,director,genre,title);
         //Assert
         assertEquals(1, actual.size());
         //Teardown
@@ -144,7 +144,7 @@ class MovieServiceTest {
         Genre genre = null;
         title = movie1.getTitle();
         //Exercise
-        List<Movie> actual = movieService.findAllByActorDirectorGenre(actor,director,genre,title);
+        List<Movie> actual = movieService.findAllByActorDirectorGenreTitle(actor,director,genre,title);
         //Assert
         assertEquals(2, actual.size());
         //Teardown
@@ -158,7 +158,7 @@ class MovieServiceTest {
         Genre genre = null;
         title = movie1.getTitle();
         //Exercise
-        List<Movie> actual = movieService.findAllByActorDirectorGenre(actor,director,genre,title);
+        List<Movie> actual = movieService.findAllByActorDirectorGenreTitle(actor,director,genre,title);
         //Assert
         assertEquals(2, actual.size());
         //Teardown
@@ -172,7 +172,7 @@ class MovieServiceTest {
         Genre genre = null;
         title = movie1.getTitle();
         //Exercise
-        List<Movie> actual = movieService.findAllByActorDirectorGenre(actor,director,genre,title);
+        List<Movie> actual = movieService.findAllByActorDirectorGenreTitle(actor,director,genre,title);
         //Assert
         assertEquals(2, actual.size());
         //Teardown

@@ -41,7 +41,7 @@ public class MovieService {
         return movieDao.findAllByTitle(title);
     }
 
-    public List<Movie> findAllByActorDirectorGenre(String actor, String director, Genre genre, String title) {
-        return movieDao.findAllByActorDirectorGenre(actor, director, genre, title);
+    public List<Movie> findAllByActorDirectorGenreTitle(String actor, String director, Genre genre, String title) {
+        return movieDao.findAllByActorDirectorGenreTitle(actor, director, genre, title);
     }
 }
