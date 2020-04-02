@@ -151,6 +151,20 @@ class MovieServiceTest {
     }
 
     @Test
+    public void findAllByActorDirectorGenreTitle_directoryAndTitleParametersPresent_returnsList() {
+        //Setup
+        String actor = null;
+        director = movie1.getDirector();
+        Genre genre = null;
+        title = movie1.getTitle();
+        //Exercise
+        List<Movie> actual = movieService.findAllByActorDirectorGenre(actor,director,genre,title);
+        //Assert
+        assertEquals(2, actual.size());
+        //Teardown
+    }
+
+    @Test
     public void findAllByActorDirectorGenreTitle_titleParameterPresent_returnsList() {
         //Setup
         String actor = null;
