@@ -123,7 +123,7 @@ class MovieServiceTest {
     }
 
     @Test
-    public void findAllByActorDirectorGenreTitle_movieDaoContainsMovies_returnsList() {
+    public void findAllByActorDirectorGenreTitle_allParametersPresent_returnsList() {
         //Setup
         String actor = "actor1";
         director = movie1.getDirector();
@@ -137,7 +137,21 @@ class MovieServiceTest {
     }
 
     @Test
-    public void findAllByTitle2_movieDaoContainsMovies_returnsList() {
+    public void findAllByActorDirectorGenreTitle_actorAndTitleParametersPresent_returnsList() {
+        //Setup
+        String actor = "actor1";
+        director = null;
+        Genre genre = null;
+        title = movie1.getTitle();
+        //Exercise
+        List<Movie> actual = movieService.findAllByActorDirectorGenre(actor,director,genre,title);
+        //Assert
+        assertEquals(2, actual.size());
+        //Teardown
+    }
+
+    @Test
+    public void findAllByActorDirectorGenreTitle_titleParameterPresent_returnsList() {
         //Setup
         String actor = null;
         director = null;
