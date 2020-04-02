@@ -1,4 +1,4 @@
-package com.galvanize.movies;
+package com.galvanize;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
