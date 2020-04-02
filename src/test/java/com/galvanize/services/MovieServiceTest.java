@@ -177,4 +177,21 @@ class MovieServiceTest {
         assertEquals(expected.getMovieid(), actual.getMovieid());
         //Teardown
     }
+
+
+    //DELETE
+
+    
+    @Test
+    public void delete_movieDaoContainsMovies_returnsVoid() {
+        //Setup
+        Movie expected = new Movie();
+        expected = movieService.save(expected);
+        expected.setImdbid("454");
+        //Exercise
+        movieService.delete(expected.getMovieid());
+        Movie actual = movieService.findByImdbId(expected.getImdbid());
+        //Assert
+        assertNull(actual);
+    }
 }

@@ -45,11 +45,25 @@ public class MovieService {
         return movieDao.findAllByActorDirectorGenreTitle(actor, director, genre, title);
     }
 
+
+    //UPDATE
+
+
     public Movie update(Long movieid, Movie movie) {
         if(movieDao.existsById(movieid)){
             return movieDao.save(movie);
         }else {
             return null;
+        }
+    }
+
+
+    //DELETE
+
+
+    public void delete(Long movieid) {
+        if(movieDao.existsById(movieid)){
+            movieDao.deleteById(movieid);
         }
     }
 }
