@@ -137,7 +137,7 @@ class MovieServiceTest {
     }
 
     @Test
-    public void findAllByTitle_movieDaoContainsMovies_returnsList() {
+    public void findAllByTitle2_movieDaoContainsMovies_returnsList() {
         //Setup
         String actor = null;
         director = null;
