@@ -26,9 +26,10 @@ class MovieTest {
         String director = "director";
         String title = "title";
         String year = "2020";
+        Genre genre = Genre.ACTION;
         LocalDate released = LocalDate.now();
         //Exercise
-        Movie movie = new Movie(imdbid, actors, director, title, year, released);
+        Movie movie = new Movie(imdbid, actors, director, title, year, released, genre);
         //Assert
         assertNotNull(movie);
         //Teardown
@@ -44,6 +45,7 @@ class MovieTest {
         String director = "director";
         String title = "title";
         String year = "2020";
+        Genre genre = Genre.ACTION;
         LocalDate released = LocalDate.now();
         //Exercise
         movie.setActors(actors);
@@ -53,6 +55,7 @@ class MovieTest {
         movie.setTitle(title);
         movie.setYear(year);
         movie.setReleased(released);
+        movie.setGenre(genre);
         //Assert
         assertEquals(actors, movie.getActors());
         assertEquals(director, movie.getDirector());
@@ -61,6 +64,7 @@ class MovieTest {
         assertEquals(title, movie.getTitle());
         assertEquals(year, movie.getYear());
         assertEquals(released, movie.getReleased());
+        assertEquals(genre, movie.getGenre());
         //Teardown
     }
 }

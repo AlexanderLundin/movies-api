@@ -28,23 +28,14 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(String imdbid, String actors, String director, String title, String year, LocalDate released) {
+    public Movie(String imdbid, String actors, String director, String title, String year, LocalDate released, Genre genre) {
         this.imdbid = imdbid;
         this.actors = actors;
         this.director = director;
         this.title = title;
         this.year = year;
         this.released = released;
-    }
-
-    public Movie(Long movieid, String imdbid, String actors, String director, String title, String year, LocalDate released) {
-        this.movieid = movieid;
-        this.imdbid = imdbid;
-        this.actors = actors;
-        this.director = director;
-        this.title = title;
-        this.year = year;
-        this.released = released;
+        this.genre = genre;
     }
 
     public Movie(Long movieid, String imdbid, String actors, String director, String title, String year, LocalDate released, Genre genre) {
@@ -112,6 +103,14 @@ public class Movie {
 
     public void setReleased(LocalDate released) {
         this.released = released;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 
     @Override
