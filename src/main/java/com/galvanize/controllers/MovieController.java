@@ -24,8 +24,13 @@ public class MovieController {
         return movieService.findAll();
     }
 
-    @GetMapping("/movies/{imdbid}")
+    @GetMapping("/movies/imdbid/{imdbid}")
     public Movie getMovieByImbdid(@PathVariable(name="imdbid") String imdbid){
         return movieService.findByImdbId(imdbid);
+    }
+
+    @GetMapping("/movies/title/{title}")
+    public List<Movie> getAllMoviesByTitle(@PathVariable(name="title") String title){
+        return movieService.findAllByTitle(title);
     }
 }

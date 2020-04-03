@@ -100,12 +100,27 @@ class MovieControllerTest {
     public void getMovieByImbdid_movieRepositoryWithMovies_returnsList() throws Exception {
         //Setup
         Movie expected = movieListInDB.get(1);
-        String url = "/api/movies/" + expected.getImdbid();
+        String url = "/api/movies/imdbid/" + expected.getImdbid();
         //Exercise
         ResultActions resultActions = mvc.perform(get(url));
         Movie actual = mapResultActionsToMovie(resultActions);
         //Assert
         assertEquals(expected, actual);
+        //Teardown
+    }
+
+    @Test
+    public void getAllMoviesByTitle_movieRepositoryWithMovies_returnsList() throws Exception {
+        //Setup
+        List<Movie> expected = movieListInDB;
+        Movie movie = movieListInDB.get(1);
+        String title = movie.getTitle();
+        String url = "/api/movies/title/" + title;
+        //Exercise
+        ResultActions resultActions = mvc.perform(get(url));
+        List<Movie> actual = mapResultActionsToMovieList(resultActions);
+        //Assert
+        assertEquals(expected.size(), actual.size());
         //Teardown
     }
 }
