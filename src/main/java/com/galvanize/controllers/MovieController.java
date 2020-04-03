@@ -17,6 +17,15 @@ public class MovieController {
     }
 
 
+    //CREATE
+
+
+    @PostMapping("/movies")
+    public Movie postMovie(@RequestBody Movie movie){
+        return movieService.save(movie);
+    }
+
+
     //READ
 
 

@@ -84,6 +84,28 @@ class MovieControllerTest {
     }
 
 
+    //CREATE
+
+
+    @Test
+    public void postMovie_daoWithoutThisMovieExisting_returnsMovie() throws Exception {
+        //Setup
+        String url = "/api/movies";
+        Movie expected = new Movie();
+        //Exercise
+        ResultActions resultActions = mvc.perform(post(url)
+                .content(objectMapper.writeValueAsString(expected))
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+        )
+                .andExpect(status().isOk());
+        Movie actual = mapResultActionsToMovie(resultActions);
+        //Assert
+        assertNotNull(actual);
+        //Teardown
+        movieService.delete(actual.getMovieid());
+    }
+
     //READ
 
 
