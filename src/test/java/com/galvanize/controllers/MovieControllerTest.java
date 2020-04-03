@@ -1,6 +1,7 @@
 package com.galvanize.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.galvanize.entities.Genre;
 import com.galvanize.entities.Movie;
@@ -67,6 +68,7 @@ class MovieControllerTest {
     public List<Movie> mapResultActionsToMovieList (ResultActions resultActions) throws UnsupportedEncodingException, JsonProcessingException {
         MvcResult result = resultActions.andReturn();
         String contentAsString = result.getResponse().getContentAsString();
+        objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
         List<Movie> movieList = Arrays.asList(objectMapper.readValue(contentAsString, Movie[].class));
         return movieList;
     }
@@ -123,4 +125,22 @@ class MovieControllerTest {
         assertEquals(expected.size(), actual.size());
         //Teardown
     }
+
+//    @Test
+//    public void getAllMoviesBySearch_movieRepositoryWithMovies_returnsList() throws Exception {
+//        //Setup
+//        List<Movie> expected = movieListInDB;
+//        Movie movie = movieListInDB.get(1);
+//        String actor = null;
+//        String director = null;
+//        Genre genre = null;
+//        String title = movie.getTitle();
+//        String url = "/api/movies/search/" + actor + "/" + director + "/" + genre + "/" + title;
+//        //Exercise
+//        ResultActions resultActions = mvc.perform(get(url));
+//        List<Movie> actual = mapResultActionsToMovieList(resultActions);
+//        //Assert
+//        assertEquals(expected.size(), actual.size());
+//        //Teardown
+//    }
 }

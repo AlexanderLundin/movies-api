@@ -1,5 +1,6 @@
 package com.galvanize.controllers;
 
+import com.galvanize.entities.Genre;
 import com.galvanize.entities.Movie;
 import com.galvanize.services.MovieService;
 import org.springframework.web.bind.annotation.*;
@@ -33,4 +34,16 @@ public class MovieController {
     public List<Movie> getAllMoviesByTitle(@PathVariable(name="title") String title){
         return movieService.findAllByTitle(title);
     }
+
+//    @GetMapping("/movies/search/{actor}/{director}/{genre}/{title}")
+//    public List<Movie> getAllMoviesByTitle(
+//            @PathVariable(required = false, name="actor") String actor,
+//            @PathVariable(required = false, name="director") String director,
+//            @PathVariable(required = false, name="genre") Genre genre,
+//            @PathVariable(name="title") String title
+//    ){
+//        return movieService.findAllByActorDirectorGenreTitle(actor,director,genre,title);
+//    }
+
+
 }
