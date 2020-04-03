@@ -45,7 +45,7 @@ class MovieControllerTest {
     @Autowired
     ObjectMapper objectMapper;
 
-    private List<Movie> movieListInDB = new ArrayList<>();;
+    private List<Movie> movieListInDB = new ArrayList<>();
 
     @BeforeEach
     public void save_validMovie_returnsMovie() {
