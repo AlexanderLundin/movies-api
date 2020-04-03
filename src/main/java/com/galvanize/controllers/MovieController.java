@@ -2,9 +2,7 @@ package com.galvanize.controllers;
 
 import com.galvanize.entities.Movie;
 import com.galvanize.services.MovieService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,11 +15,17 @@ public class MovieController {
         this.movieService = movieService;
     }
 
+
     //READ
 
 
     @GetMapping("/movies")
     public List<Movie> getAllMovies(){
         return movieService.findAll();
+    }
+
+    @GetMapping("/movies/{imdbid}")
+    public Movie getMovieByImbdid(@PathVariable(name="imdbid") String imdbid){
+        return movieService.findByImdbId(imdbid);
     }
 }

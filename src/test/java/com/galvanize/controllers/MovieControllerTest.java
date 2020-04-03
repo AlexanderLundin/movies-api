@@ -71,6 +71,14 @@ class MovieControllerTest {
         return movieList;
     }
 
+    public Movie mapResultActionsToMovie (ResultActions resultActions) throws UnsupportedEncodingException, JsonProcessingException {
+        MvcResult result = resultActions.andReturn();
+        String contentAsString = result.getResponse().getContentAsString();
+        //objectMapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
+        Movie movie = objectMapper.readValue(contentAsString, Movie.class);
+        return movie;
+    }
+
 
     //READ
 
@@ -83,6 +91,19 @@ class MovieControllerTest {
         //Exercise
         ResultActions resultActions = mvc.perform(get(url));
         List<Movie> actual = mapResultActionsToMovieList(resultActions);
+        //Assert
+        assertEquals(expected, actual);
+        //Teardown
+    }
+
+    @Test
+    public void getMovieByImbdid_movieRepositoryWithMovies_returnsList() throws Exception {
+        //Setup
+        Movie expected = movieListInDB.get(1);
+        String url = "/api/movies/" + expected.getImdbid();
+        //Exercise
+        ResultActions resultActions = mvc.perform(get(url));
+        Movie actual = mapResultActionsToMovie(resultActions);
         //Assert
         assertEquals(expected, actual);
         //Teardown
