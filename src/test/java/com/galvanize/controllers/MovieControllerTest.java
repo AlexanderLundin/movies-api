@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -25,6 +26,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -143,4 +146,26 @@ class MovieControllerTest {
 //        assertEquals(expected.size(), actual.size());
 //        //Teardown
 //    }
+
+
+    //UPDATE
+
+    @Test
+    public void patchMovie_daoWithThisMovieExisting_returnsMovie() throws Exception {
+        //Setup
+        Movie movie = movieListInDB.get(1);
+        String url = "/api/movies/" + movie.getMovieid();
+        Movie expected = new Movie();
+        //Exercise
+        ResultActions resultActions = mvc.perform(patch(url)
+                .content(objectMapper.writeValueAsString(expected))
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .accept(MediaType.APPLICATION_JSON_VALUE)
+        )
+                .andExpect(status().isOk());
+        Movie actual = mapResultActionsToMovie(resultActions);
+        //Assert
+        assertNotNull(actual.equals(expected));
+        //Teardown
+    }
 }

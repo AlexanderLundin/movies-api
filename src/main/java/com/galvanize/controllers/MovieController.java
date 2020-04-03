@@ -46,4 +46,12 @@ public class MovieController {
 //    }
 
 
+    //UPDATE
+
+    @PatchMapping("/movies/{movieid}")
+    public Movie patchMovie(@PathVariable Long movieid, @RequestBody Movie movie){
+        return movieService.update(movieid, movie);
+    }
+
+
 }

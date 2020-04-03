@@ -150,9 +150,10 @@ class MovieServiceTest {
     @Test
     public void findAllByActorDirectorGenreTitle_titleParameterPresent_returnsList() {
         //Setup
-        String actor = null;
-        String director = null;
-        Genre genre = null;
+        Movie movie = movieListInDB.get(1);
+        String actor = "actor";
+        String director = movie.getDirector();
+        Genre genre = movie.getGenre();
         String title = movieListInDB.get(1).getTitle();
         //Exercise
         List<Movie> actual = movieService.findAllByActorDirectorGenreTitle(actor,director,genre,title);
