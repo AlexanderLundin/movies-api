@@ -25,8 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -166,6 +165,25 @@ class MovieControllerTest {
         Movie actual = mapResultActionsToMovie(resultActions);
         //Assert
         assertNotNull(actual.equals(expected));
+        //Teardown
+    }
+
+
+    //DELETE
+
+
+    @Test
+    public void deleteMovie_daoWithThisMovieExisting_returnsMovie() throws Exception {
+        //Setup
+        Movie movie = new Movie();
+        movie = movieService.save(movie);
+        String url = "/api/movies/" + movie.getMovieid();
+        //Exercise
+        ResultActions resultActions = mvc.perform(delete(url))
+                .andExpect(status().isOk());
+        Movie actual = movieService.findByImdbId(movie.getImdbid());
+        //Assert
+        assertNull(actual);
         //Teardown
     }
 }
