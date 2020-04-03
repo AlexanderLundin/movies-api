@@ -41,8 +41,8 @@ public class MovieService {
         return movieRepository.findAllByTitle(title);
     }
 
-    public List<Movie> findAllByActorDirectorGenreTitle(String actor, String director, Genre genre, String title) {
-        return movieRepository.findAllByActorDirectorGenreTitle(actor, director, genre, title);
+    public List<Movie> findAllByActorDirectorTitle(String actor, String director, String title) {
+        return movieRepository.findAllByActorDirectorTitle(actor, director, title);
     }
 
 

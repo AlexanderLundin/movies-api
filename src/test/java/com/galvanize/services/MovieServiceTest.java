@@ -106,59 +106,15 @@ class MovieServiceTest {
     }
 
     @Test
-    public void findAllByActorDirectorGenreTitle_allParametersPresent_returnsList() {
+    public void findAllByActorDirectorTitle_allParametersPresent_returnsList() {
         //Setup
         String actor = "actor1";
         String director = movieListInDB.get(1).getDirector();
-        Genre genre = Genre.ROMANCE;
         String title = movieListInDB.get(1).getTitle();
         //Exercise
-        List<Movie> actual = movieService.findAllByActorDirectorGenreTitle(actor,director,genre,title);
+        List<Movie> actual = movieService.findAllByActorDirectorTitle(actor,director,title);
         //Assert
         assertEquals(0, actual.size());
-        //Teardown
-    }
-
-    @Test
-    public void findAllByActorDirectorGenreTitle_actorAndTitleParametersPresent_returnsList() {
-        //Setup
-        String actor = "actor1";
-        String director = null;
-        Genre genre = null;
-        String title = movieListInDB.get(1).getTitle();
-        //Exercise
-        List<Movie> actual = movieService.findAllByActorDirectorGenreTitle(actor,director,genre,title);
-        //Assert
-        assertEquals(movieListInDB.size(), actual.size());
-        //Teardown
-    }
-
-    @Test
-    public void findAllByActorDirectorGenreTitle_directorAndTitleParametersPresent_returnsList() {
-        //Setup
-        String actor = null;
-        String director = movieListInDB.get(1).getDirector();
-        Genre genre = null;
-        String title = movieListInDB.get(1).getTitle();
-        //Exercise
-        List<Movie> actual = movieService.findAllByActorDirectorGenreTitle(actor,director,genre,title);
-        //Assert
-        assertEquals(movieListInDB.size(), actual.size());
-        //Teardown
-    }
-
-    @Test
-    public void findAllByActorDirectorGenreTitle_titleParameterPresent_returnsList() {
-        //Setup
-        Movie movie = movieListInDB.get(1);
-        String actor = "actor";
-        String director = movie.getDirector();
-        Genre genre = movie.getGenre();
-        String title = movieListInDB.get(1).getTitle();
-        //Exercise
-        List<Movie> actual = movieService.findAllByActorDirectorGenreTitle(actor,director,genre,title);
-        //Assert
-        assertEquals(movieListInDB.size(), actual.size());
         //Teardown
     }
 
